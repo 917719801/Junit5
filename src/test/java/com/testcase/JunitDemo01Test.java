@@ -1,14 +1,40 @@
 package com.testcase;
 
-import org.junit.jupiter.api.Test;
 
+
+import org.junit.jupiter.api.*;
+@DisplayName("Junit5Demo运行")
 public class JunitDemo01Test {
+    @BeforeAll
+    public static void before() {
+        System.out.println("before");
+    }
+
+    @BeforeEach
+    public void beforeeach() {
+        System.out.println("beforeeach");
+    }
+
+    @AfterEach
+    public void aftereach() {
+        System.out.println("aftereach");
+    }
+
     @Test
-    void fun1(){
+    @DisplayName("case1")
+    @RepeatedTest(5)
+    void fun1() {
         System.out.println("fun1");
     }
+
     @Test
-    void fun2(){
+    @Disabled
+    void fun2() {
         System.out.println("fun2");
+    }
+
+    @AfterAll
+    public static void after() {
+        System.out.println("after");
     }
 }
