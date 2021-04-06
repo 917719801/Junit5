@@ -3,6 +3,9 @@ package com.testcase;
 
 
 import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DisplayName("Junit5Demo运行")
 public class JunitDemo01Test {
     @BeforeAll
@@ -31,6 +34,10 @@ public class JunitDemo01Test {
     @Disabled
     void fun2() {
         System.out.println("fun2");
+    }
+    @Test
+    void demo(){
+        assertEquals(1,2);
     }
 
     @AfterAll
