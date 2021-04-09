@@ -11,8 +11,8 @@ class CaleTest {
 
     @Test
     @Tag("xxx")
-    @Link("https://www.baidu.com")
-    @Link(name="allure",type = "mylink")
+    @Link(name="allure",type = "mylink",url="https://www.baidu.com")
+
 
     void dic() {
         Allure.step("第一步");
