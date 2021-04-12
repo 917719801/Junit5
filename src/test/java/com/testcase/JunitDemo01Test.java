@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("Junit5Demo运行")
+@DisplayName("Junit5Demo冒烟")
 public class JunitDemo01Test {
     @BeforeAll
     public static void before() {
