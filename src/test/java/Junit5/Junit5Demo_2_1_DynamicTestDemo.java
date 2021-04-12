@@ -1,4 +1,7 @@
 package Junit5;
+/*
+动态测试演示
+ */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,9 +44,10 @@ public class Junit5Demo_2_1_DynamicTestDemo {
     Collection<DynamicTest> runShellResult() throws IOException {
         List<DynamicTest> dynamicTestsList = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-
+        //yaml反序列化
         ResultList resultList = objectMapper.readValue(new File("src/main/resources/shell_test_result.yaml"), ResultList.class);
         System.out.println("-----");
+        //动态遍历生成测试方法
         for (ShellResult shellResult : resultList.getResultList()) {
             dynamicTestsList.add(dynamicTest(shellResult.getCaseName(), () -> {
                 assertTrue(shellResult.isResult());
