@@ -1,7 +1,7 @@
 package Junit5;
 /*
 断言示例
-一起断言的好处：出现问题后用例将继续执行
+软断言的好处：出现问题后用例将继续执行
  */
 
 import org.junit.jupiter.api.Test;
