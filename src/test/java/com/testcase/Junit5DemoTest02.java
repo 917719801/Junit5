@@ -11,7 +11,7 @@ public class Junit5DemoTest02 {
         assertAll("demo",
                 ()-> assertEquals(1,2),
                 ()-> assertEquals(1,1),
-                ()-> assertEquals(1,4),
+                ()-> assertEquals(1,4,"与实际结果不符"),
                 ()-> assertEquals(1,5)
         );
 
