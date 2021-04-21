@@ -18,6 +18,7 @@ public class WechatTest {
     @BeforeAll
     public  static  void init(){
         webDriver = new SafariDriver();
+        //隐式等待
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
@@ -42,4 +43,6 @@ public class WechatTest {
             e.printStackTrace();
         }
     }
+
+
 }
