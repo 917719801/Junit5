@@ -24,8 +24,8 @@ public class WechatTest {
     public  static  void init(){
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("debuggerAddress","localhost:9222");
-       webDriver = new ChromeDriver(options);
-        //webDriver = new ChromeDriver();
+       //webDriver = new ChromeDriver(options);
+        webDriver = new ChromeDriver();
 
         //隐式等待
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -40,41 +40,42 @@ public class WechatTest {
     @Test
     void saveCookie(){
         try {
-            webDriver.get("https://work.weixin.qq.com/");
-            Thread.sleep(1000);
+            webDriver.get("https://work.weixin.qq.com/wework_admin/frame");
+            Thread.sleep(10000);
             Set<Cookie> cookies = webDriver.manage().getCookies();
             webDriver.navigate().refresh();
-            ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+            ObjectMapper objectMapper=new ObjectMapper(new YAMLFactory());
+            //todo: 使用getResource代替
             objectMapper.writeValue(new File("cookie.yaml"),cookies);
-            cookies.forEach(cookie -> System.out.println(cookie.getName()+":"+cookie.getValue()));
+            cookies.forEach(cookie-> System.out.println(cookie.getName()+":"+cookie.getValue()));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
     @Test
-    void loginTest(){
-        try{
-            webDriver.get("https://work.weixin.qq.com/");
+    void loginTest() {
+        try {
+            webDriver.get("https://work.weixin.qq.com/wework_admin/frame");
 
-            ObjectMapper objectMapper=new ObjectMapper(new YAMLFactory());
-            TypeReference<List<HashMap<String, Object>>> typeReference=new TypeReference<List<HashMap<String, Object>>>(){};
+            ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+            TypeReference<List<HashMap<String, Object>>> typeReference = new TypeReference<List<HashMap<String, Object>>>() {
+            };
             List<HashMap<String, Object>> cookies = objectMapper.readValue(new File("cookie.yaml"), typeReference);
-            cookies.forEach(cookie->{
-                webDriver.manage().addCookie(new Cookie(cookie.get("name").toString(),cookie.get("value").toString()));
+            cookies.forEach(cookie -> {
+                webDriver.manage().addCookie(new Cookie(cookie.get("name").toString(), cookie.get("value").toString()));
             });
 
             webDriver.navigate().refresh();
-            webDriver.findElement(By.linkText("通讯录")).click();
 
-        }catch (Exception e){
-            e.printStackTrace();
+            Thread.sleep(15000);
+
+
+        } catch (Exception e) {
+
         }
 
-
-
     }
-
-
 
 }
