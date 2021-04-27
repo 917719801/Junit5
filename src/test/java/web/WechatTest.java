@@ -24,8 +24,8 @@ public class WechatTest {
     public  static  void init(){
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("debuggerAddress","localhost:9222");
-       //webDriver = new ChromeDriver(options);
-        webDriver = new ChromeDriver();
+        webDriver = new ChromeDriver(options);
+       // webDriver = new ChromeDriver();
 
         //隐式等待
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -40,7 +40,7 @@ public class WechatTest {
     @Test
     void saveCookie(){
         try {
-            webDriver.get("https://work.weixin.qq.com/wework_admin/frame");
+            //webDriver.get("https://work.weixin.qq.com/wework_admin/frame");
             Thread.sleep(10000);
             Set<Cookie> cookies = webDriver.manage().getCookies();
             webDriver.navigate().refresh();
