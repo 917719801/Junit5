@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,12 +39,20 @@ public class MainPage {
 
         driver.navigate().refresh();
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
 
     public ContactPage toContact() {
-        driver.findElement(By.cssSelector(".frame_nav_item_title")).click();
+        new WebDriverWait(MainPage.driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(.,'通讯录')]")));
+        //driver.findElement(By.cssSelector(".frame_nav_item_title")).click();
+        driver.findElement(By.xpath("//span[contains(.,'通讯录')]")).click();
         return new ContactPage();
     }
 }
