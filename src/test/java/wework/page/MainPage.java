@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainPage {
-    public static WebDriver webDriver;
+    public static ChromeDriver driver;
 
     public MainPage() {
         String url = "https://work.weixin.qq.com/wework_admin/frame";
-        webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriver.get(url);
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get(url);
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
         TypeReference<List<HashMap<String, Object>>> typeReference = new TypeReference<List<HashMap<String, Object>>>() {
         };
@@ -32,16 +32,17 @@ public class MainPage {
             e.printStackTrace();
         }
         cookies.forEach(cookie -> {
-            webDriver.manage().addCookie(new Cookie(cookie.get("name").toString(), cookie.get("value").toString()));
+            driver.manage().addCookie(new Cookie(cookie.get("name").toString(), cookie.get("value").toString()));
         });
 
-        webDriver.navigate().refresh();
+        driver.navigate().refresh();
+
 
     }
 
 
     public ContactPage toContact() {
-        webDriver.findElement(By.cssSelector(".frame_nav_item_title")).click();
+        driver.findElement(By.cssSelector(".frame_nav_item_title")).click();
         return new ContactPage();
     }
 }
