@@ -1,4 +1,4 @@
-package wework.testcase;
+package wework;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -36,6 +36,6 @@ public class TestContact {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        MainPage.driver.quit();
+        mainPage.quit();
     }
 }
