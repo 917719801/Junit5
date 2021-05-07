@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import wework.page.ContactPage;
 import wework.page.MainPage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TestContact {
     static MainPage mainPage;
     static ContactPage contactPage;
@@ -19,14 +21,21 @@ public class TestContact {
     @Test
     @Order(1)
     void testAddMember(){
-        contactPage.addMember("4","4","18829356667");
+        String userName=contactPage.addMember("4","4","18829356667").search("4").getUserName();
         //断言
+        assertEquals(userName,4 );
     }
+
 
     @Test
     @Order(2)
     void searchTest(){
         contactPage.search("4").delete();
+    }
+
+    @Test
+    void  testImportFromFile(){
+        contactPage.importFromFile(this.getClass().getResource("/通讯录批量导入.xlsx"));
     }
 
     @AfterAll

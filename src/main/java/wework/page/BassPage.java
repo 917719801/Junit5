@@ -11,10 +11,12 @@ import java.util.concurrent.TimeUnit;
 public class BassPage {
 
     RemoteWebDriver driver;
-    WebDriverWait wait;
+    private WebDriverWait wait;
 
     public BassPage(RemoteWebDriver driver) {
+
         this.driver = driver;
+        wait=new WebDriverWait(driver, 10);
     }
 
     public BassPage() {
@@ -29,8 +31,22 @@ public class BassPage {
     }
 
     public void click(By by) {
-        //wait.until(ExpectedConditions.elementToBeClickable(by));
+        wait.until(ExpectedConditions.elementToBeClickable(by));
         driver.findElement(by).click();
     }
+
+    public void  sendKeys(By by,String content){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        driver.findElement(by).sendKeys(content);
+    }
+
+
+    public void  upload(By by,String path){
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        driver.findElement(by).sendKeys(path);
+
+
+    }
+
 
 }
